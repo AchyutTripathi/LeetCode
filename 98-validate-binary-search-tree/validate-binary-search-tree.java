@@ -1,25 +1,24 @@
 class Solution {
-    private TreeNode prev = null;
-
     public boolean isValidBST(TreeNode root) {
-        return inOrder(root);
+      return helper(root, null ,null);
     }
 
-    private boolean inOrder(TreeNode node) {
+    public boolean helper(TreeNode node, Integer low, Integer high)  {
         if (node == null) {
             return true;
         }
 
-        if (!inOrder(node.left)) {
+        if (low != null && node.val <= low) {
             return false;
         }
 
-        if (prev != null && node.val <= prev.val) {
+        if (high != null && node.val >= high) {
             return false;
         }
 
-        prev = node;
+        boolean leftTree = helper (node.left, low, node.val);
+        boolean rightTree = helper (node.right, node.val, high);
 
-        return inOrder(node.right);
+        return leftTree && rightTree;
     }
 }
