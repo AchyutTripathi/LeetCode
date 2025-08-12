@@ -8,142 +8,48 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-// class Solution {
-//     public ListNode reverseKGroup(ListNode head, int k) {
-//         if(k <= 1 || head == null) {
-//             return head;
-//         }
-
-//         ListNode current = head;
-//         ListNode prev = null;
-
-//         while (true) {
-//         // check if k nodes remain 
-//         ListNode check = current;
-//         int count = 0;
-//         while (check != null && count < k) {
-//             check = check.next;
-//             count++;
-//         }
-
-//         if (count < k) {
-//             break; // not enough node to reverse
-//         }
-
-//         ListNode last = prev;
-//         ListNode NewEnd = current;
-
-//         // reverse between left to right
-//         ListNode next = current.next;
-//         for (int i = 0; current != null && i < k; i++) {
-//             current.next = prev;
-//             prev = current;
-//             current = next;
-//             if(next != null) {
-//                 next = next.next;
-//             }
-//         }
-//         if (last != null) {
-//             last.next = prev;
-//         } else {
-//             head = prev;
-//         }
-//         NewEnd.next = current;
-
-//         if (current == null) {
-//             break;
-//         }
-
-//         prev = NewEnd;
-//         }
-//         return head;
-//     }
-
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
-       ListNode prevHead=new ListNode(0);
-       ListNode prevdummy=prevHead;
-       ListNode rev=head;
-       ListNode dummy=new ListNode(0);
-       ListNode temp=head;
-       int flag=0;
-       while(flag==0){
-       for(int i=1;i<=k;i++)
+       ListNode prevHead = new ListNode(0);
+       ListNode prevGroupTail = prevHead;
+       ListNode groupHead = head;
+       ListNode nextGroupHead = head;
+       int flag = 0;
+       while(flag == 0){
+       for(int i = 1; i <= k; i++)
        {
-        if(temp==null)
+        if(nextGroupHead == null)
         {
-            flag=1;
+            flag = 1;
             break;
         }
-       
-        temp=temp.next;
-
-
+        nextGroupHead = nextGroupHead.next;
        }
-       if(flag==0)
+       if(flag == 0)
        {
-        ListNode revHead=reverse(rev,k);
+        ListNode revHead = reverse(groupHead,k);
         
-        prevdummy.next=revHead;
-        rev.next=temp;
-        prevdummy=rev;
+        prevGroupTail.next = revHead;
+        groupHead.next = nextGroupHead;
+        prevGroupTail = groupHead;
       
-        rev=temp;
+        groupHead = nextGroupHead;
        }
        }
-       if(temp!=null){
-       prevdummy.next=temp;
+       if(nextGroupHead != null){
+       prevGroupTail.next = nextGroupHead;
        }
-
-
-
         return prevHead.next;
     }
     private ListNode reverse(ListNode temp,int k)
-    {    ListNode prev=null;
+    {    ListNode prev = null;
             
-        for(int i=1;i<=k;i++)
+        for(int i = 1; i <= k; i++)
         {
-            ListNode next=temp.next;
-            temp.next=prev;
-            prev=temp;
-            temp=next;
+            ListNode next = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = next;
         }
        return prev;
     }
