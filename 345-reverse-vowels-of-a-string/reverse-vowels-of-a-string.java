@@ -8,7 +8,6 @@ class Solution {
             while (left < right && vowels.indexOf(word[left]) == -1) {
                 left++;
             }
-
             while (left < right && vowels.indexOf(word[right]) == -1) {
                 right--;
             }
@@ -18,10 +17,10 @@ class Solution {
             word[right] = temp;
 
             left++;
-            right--;
+            right--; 
         }
 
-        String ans = new String (word);
+        String ans = new String(word);
         return ans;
     }
 }
