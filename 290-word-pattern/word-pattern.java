@@ -4,29 +4,24 @@ class Solution {
 
         if (pattern.length() != word.length) return false;
 
-        HashMap<Character, String> charToWord = new HashMap<>();
-        HashMap<String, Character> wordToChar = new HashMap<>();
+        HashMap<Character, String> charToWord = new HashMap<>(); 
+        HashMap<String, Character> wordToChar = new HashMap<>(); 
 
         for (int i = 0; i < pattern.length(); i++) {
             char c = pattern.charAt(i);
             String w = word[i];
 
-
-        if (charToWord.containsKey(c)) {
-            if (!charToWord.get(c).equals(w)) {
-                return false;
-            }
+            if (charToWord.containsKey(c)) {
+                if (!charToWord.get(c).equals(w)) return false;
             } else {
                 charToWord.put(c, w);
-        }
+            }
 
-        if (wordToChar.containsKey(w)) {
-            if (wordToChar.get(w) != c) {
-                return false;
-            } 
+            if (wordToChar.containsKey(w)) {
+                if (wordToChar.get(w) != c) return false;
             } else {
                 wordToChar.put(w, c);
-        }
+            }
         }
         return true;
     }
