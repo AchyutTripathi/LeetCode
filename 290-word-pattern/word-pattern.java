@@ -12,13 +12,17 @@ class Solution {
             String w = word[i];
 
             if (charToWord.containsKey(c)) {
-                if (!charToWord.get(c).equals(w)) return false;
+                if (!charToWord.get(c).equals(w)) {
+                    return false;
+                }
             } else {
                 charToWord.put(c, w);
             }
 
             if (wordToChar.containsKey(w)) {
-                if (wordToChar.get(w) != c) return false;
+                if (wordToChar.get(w) != c) {
+                    return false;
+                }
             } else {
                 wordToChar.put(w, c);
             }
