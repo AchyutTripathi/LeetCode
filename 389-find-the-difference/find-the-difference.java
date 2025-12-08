@@ -1,14 +1,23 @@
 class Solution {
     public char findTheDifference(String s, String t) {
-        char[] c = s.toCharArray();
-        char[] d = t.toCharArray();
-        Arrays.sort(c);
-        Arrays.sort(d);
-        for (int i = 0; i < c.length; i++) {
-            if (c[i] != d[i]) {
-                return d[i];
+
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        // Count frequencies in s
+        for (char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        // Subtract frequencies using t
+        for (char c : t.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) - 1);
+
+            // If count becomes negative, that is the extra character
+            if (map.get(c) < 0) {
+                return c;
             }
         }
-        return d[d.length - 1];
+
+        return ' '; // never reached
     }
 }
