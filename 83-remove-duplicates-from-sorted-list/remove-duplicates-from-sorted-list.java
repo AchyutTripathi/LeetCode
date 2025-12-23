@@ -9,7 +9,7 @@
  * }
  */
 class Solution {
-    public ListNode deleteDuplicates(ListNode node ){
+    public ListNode deleteDuplicates(ListNode node) {
         if (node == null) {
             return node;
         }
