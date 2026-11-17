@@ -1,13 +1,14 @@
 class Solution {
     public String reverseWords(String s) {
         String[] arr = s.trim().split("\\s+");
-        int i=0,j=arr.length-1;
-        while(i<j) {
-            String t = arr[i];
-            arr[i] = arr[j];
-            arr[j] = t;
-            i++;
-            j--;
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {
+            String t = arr[left];
+            arr[left] = arr[right];
+            arr[right] = t;
+            left++;
+            right--;
         }
         return String.join(" ", arr);
     }
