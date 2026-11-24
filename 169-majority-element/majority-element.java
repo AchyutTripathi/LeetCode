@@ -1,15 +1,28 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        int n = nums.length;
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i : nums) {
-            map.put(i, map.getOrDefault(i, 0) + 1);
+        // Moore's Voting Algo
+        int cnt = 0;
+        int ele = 0;
+        int n = nums.length;  
+        for (int i = 0; i < n; i++) {
+            if (cnt == 0) {
+                cnt = 1; 
+                ele = nums[i];
+            } else if (ele == nums[i]) {
+                cnt++;
+            } else {
+                cnt--;
+            }              
         }
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            if (entry.getValue() > n / 2) {
-                return entry.getKey();
+        int cnt1 = 0;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == ele) {
+                cnt1++;
             }
         }
-        return -1;
+        if (cnt1 > n/ 2) {
+            return ele;
+        }
+        return -1; 
     }
 }
